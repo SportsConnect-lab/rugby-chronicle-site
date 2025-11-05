@@ -92,7 +92,8 @@ const pagePosts = allFetched.slice(start, end);
 
   // スライダー（最新5件）
   const slideData = await gql<SlidesResp>(SLIDES_QUERY);
-  const slides: SlidePost[] = (slideData.posts?.nodes ?? []).slice(0, 5);
+  const slides = slideData?.posts?.nodes || []
+
 
   // ===== 固定ランキングの取得＆整列 =====
   const curatedResp = await gql<{ posts: { nodes: WPPost[] } }>(POSTS_BY_SLUGS, {
